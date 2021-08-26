@@ -1,1 +1,3 @@
 # GameCounter
+
+The test task
