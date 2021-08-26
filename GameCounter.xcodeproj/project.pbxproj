@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */; };
-		2CCCE51B26D7D98900E3B8B7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51A26D7D98900E3B8B7 /* SceneDelegate.swift */; };
 		2CCCE51D26D7D98900E3B8B7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51C26D7D98900E3B8B7 /* ViewController.swift */; };
 		2CCCE52026D7D98900E3B8B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */; };
 		2CCCE52226D7D98C00E3B8B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2CCCE52126D7D98C00E3B8B7 /* Assets.xcassets */; };
@@ -18,7 +17,6 @@
 /* Begin PBXFileReference section */
 		2CCCE51526D7D98900E3B8B7 /* GameCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2CCCE51A26D7D98900E3B8B7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		2CCCE51C26D7D98900E3B8B7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		2CCCE51F26D7D98900E3B8B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2CCCE52126D7D98C00E3B8B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +55,6 @@
 			isa = PBXGroup;
 			children = (
 				2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */,
-				2CCCE51A26D7D98900E3B8B7 /* SceneDelegate.swift */,
 				2CCCE51C26D7D98900E3B8B7 /* ViewController.swift */,
 				2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */,
 				2CCCE52126D7D98C00E3B8B7 /* Assets.xcassets */,
@@ -139,7 +136,6 @@
 			files = (
 				2CCCE51D26D7D98900E3B8B7 /* ViewController.swift in Sources */,
 				2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */,
-				2CCCE51B26D7D98900E3B8B7 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +212,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -271,7 +267,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -289,6 +285,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9V2HJR8B4;
 				INFOPLIST_FILE = GameCounter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -308,6 +305,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M9V2HJR8B4;
 				INFOPLIST_FILE = GameCounter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
