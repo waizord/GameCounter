@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C41662B26D962A700E78AE3 /* Nunito-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662726D962A700E78AE3 /* Nunito-ExtraBold.ttf */; };
+		2C41662C26D962A700E78AE3 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662826D962A700E78AE3 /* Nunito-SemiBold.ttf */; };
+		2C41662D26D962A700E78AE3 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662926D962A700E78AE3 /* Nunito-Bold.ttf */; };
+		2C41662E26D962A700E78AE3 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662A26D962A700E78AE3 /* OFL.txt */; };
 		2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */; };
 		2CCCE51D26D7D98900E3B8B7 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */; };
 		2CCCE52026D7D98900E3B8B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */; };
@@ -15,6 +19,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C41662726D962A700E78AE3 /* Nunito-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-ExtraBold.ttf"; sourceTree = "<group>"; };
+		2C41662826D962A700E78AE3 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
+		2C41662926D962A700E78AE3 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
+		2C41662A26D962A700E78AE3 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		2CCCE51526D7D98900E3B8B7 /* GameCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
@@ -35,6 +43,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2C41662326D9623800E78AE3 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				2C41662626D962A700E78AE3 /* Fonts */,
+				2CCCE52126D7D98C00E3B8B7 /* Assets.xcassets */,
+				2CCCE52326D7D98C00E3B8B7 /* LaunchScreen.storyboard */,
+				2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */,
+				2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		2C41662426D9626200E78AE3 /* NewGameVC */ = {
+			isa = PBXGroup;
+			children = (
+				2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */,
+			);
+			path = NewGameVC;
+			sourceTree = "<group>";
+		};
+		2C41662626D962A700E78AE3 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2C41662726D962A700E78AE3 /* Nunito-ExtraBold.ttf */,
+				2C41662826D962A700E78AE3 /* Nunito-SemiBold.ttf */,
+				2C41662926D962A700E78AE3 /* Nunito-Bold.ttf */,
+				2C41662A26D962A700E78AE3 /* OFL.txt */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		2CCCE50C26D7D98900E3B8B7 = {
 			isa = PBXGroup;
 			children = (
@@ -54,11 +93,8 @@
 		2CCCE51726D7D98900E3B8B7 /* GameCounter */ = {
 			isa = PBXGroup;
 			children = (
-				2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */,
-				2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */,
-				2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */,
-				2CCCE52126D7D98C00E3B8B7 /* Assets.xcassets */,
-				2CCCE52326D7D98C00E3B8B7 /* LaunchScreen.storyboard */,
+				2C41662426D9626200E78AE3 /* NewGameVC */,
+				2C41662326D9623800E78AE3 /* Support Files */,
 				2CCCE52626D7D98C00E3B8B7 /* Info.plist */,
 			);
 			path = GameCounter;
@@ -121,9 +157,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C41662E26D962A700E78AE3 /* OFL.txt in Resources */,
 				2CCCE52526D7D98C00E3B8B7 /* LaunchScreen.storyboard in Resources */,
 				2CCCE52226D7D98C00E3B8B7 /* Assets.xcassets in Resources */,
 				2CCCE52026D7D98900E3B8B7 /* Main.storyboard in Resources */,
+				2C41662B26D962A700E78AE3 /* Nunito-ExtraBold.ttf in Resources */,
+				2C41662D26D962A700E78AE3 /* Nunito-Bold.ttf in Resources */,
+				2C41662C26D962A700E78AE3 /* Nunito-SemiBold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

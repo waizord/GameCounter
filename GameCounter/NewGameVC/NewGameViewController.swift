@@ -13,6 +13,8 @@ class NewGameViewController: UIViewController {
     let gameLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "Nunito-ExtraBold", size: 36)
+        label.textColor = .white
         label.text = "Game Counter"
         return label
     }()
@@ -49,6 +51,7 @@ extension NewGameViewController {
         playersTable.delegate = self
         
         playersTable.layer.cornerRadius = 16
+        playersTable.backgroundColor = .gray
         
         view.addSubview(playersTable)
         
@@ -56,7 +59,7 @@ extension NewGameViewController {
             playersTable.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 25),
             playersTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            playersTable.heightAnchor.constraint(equalToConstant: CGFloat(dataSourse.count * 44))
+            playersTable.heightAnchor.constraint(equalToConstant: CGFloat(dataSourse.count * 54))
         ])
     }
 }
@@ -70,9 +73,14 @@ extension NewGameViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
         cell.textLabel?.text = dataSourse[indexPath.row]
+        cell.textLabel?.textColor = .white
+        cell.textLabel?.font = UIFont(name: "Nunito-ExtraBold", size: 20)
+        cell.backgroundColor = .clear
         return cell
     }
 }
 extension NewGameViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 54
+    }
 }
