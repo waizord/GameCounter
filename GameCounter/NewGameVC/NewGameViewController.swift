@@ -26,6 +26,22 @@ class NewGameViewController: UIViewController {
         return table
     }()
     
+    let startButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(tapStartGameButton), for: .touchUpInside)
+        button.titleLabel?.font = UIFont(name: "Nunito-ExtraBold", size: 24)
+        button.titleLabel?.textColor = .white
+        button.setTitle("Start game", for: .normal)
+        button.backgroundColor = Constants.colors.customGreen
+        button.layer.cornerRadius = Constants.share.startButtonHeight / 2
+        button.layer.shadowColor = Constants.colors.customShadowGreen.cgColor
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
+        button.layer.shadowOpacity = 1.0
+        button.layer.masksToBounds = false
+        return button
+    }()
+    
     let heightConstraint = NSLayoutConstraint()
 
     override func viewDidLoad() {
@@ -33,6 +49,7 @@ class NewGameViewController: UIViewController {
         self.view.backgroundColor = Constants.colors.appBackgroundBlack
         settingGameLabel()
         settingPlayersTableView()
+        settingStartGameButton()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,6 +81,7 @@ extension NewGameViewController {
             gameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
         ])
     }
+    
     func settingPlayersTableView() {
         playersTable.register(UITableViewCell.self, forCellReuseIdentifier: "PlayerCell")
         playersTable.dataSource = self
@@ -81,6 +99,17 @@ extension NewGameViewController {
             playersTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(dataSourse.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
+        ])
+    }
+    
+    func settingStartGameButton() {
+        view.addSubview(startButton)
+        
+        NSLayoutConstraint.activate([
+            startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -70),
+            startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            startButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            startButton.heightAnchor.constraint(equalToConstant: Constants.share.startButtonHeight)
         ])
     }
 }
@@ -123,6 +152,11 @@ extension NewGameViewController {
         playersTable.deleteRows(at: [indexPath], with: .fade)
         playersTable.reloadData()
         viewDidLayoutSubviews()
+    }
+    @objc func tapStartGameButton() {
+        let gameVC = GameViewController()
+        self.navigationController?.pushViewController(gameVC, animated: true)
+        print("start")
     }
 }
 
