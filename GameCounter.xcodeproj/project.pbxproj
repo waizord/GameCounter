@@ -11,6 +11,7 @@
 		2C41662C26D962A700E78AE3 /* Nunito-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662826D962A700E78AE3 /* Nunito-SemiBold.ttf */; };
 		2C41662D26D962A700E78AE3 /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662926D962A700E78AE3 /* Nunito-Bold.ttf */; };
 		2C41662E26D962A700E78AE3 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2C41662A26D962A700E78AE3 /* OFL.txt */; };
+		2C4A586826DA48480033E740 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A586726DA48480033E740 /* Constants.swift */; };
 		2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */; };
 		2CCCE51D26D7D98900E3B8B7 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */; };
 		2CCCE52026D7D98900E3B8B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		2C41662826D962A700E78AE3 /* Nunito-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-SemiBold.ttf"; sourceTree = "<group>"; };
 		2C41662926D962A700E78AE3 /* Nunito-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Nunito-Bold.ttf"; sourceTree = "<group>"; };
 		2C41662A26D962A700E78AE3 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
+		2C4A586726DA48480033E740 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2CCCE51526D7D98900E3B8B7 /* GameCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,21 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		2C41663026D967BE00E78AE3 /* AddPlayerVC */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AddPlayerVC;
+			sourceTree = "<group>";
+		};
+		2C4A586626DA482E0033E740 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				2C4A586726DA48480033E740 /* Constants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		2CCCE50C26D7D98900E3B8B7 = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +110,9 @@
 		2CCCE51726D7D98900E3B8B7 /* GameCounter */ = {
 			isa = PBXGroup;
 			children = (
+				2C4A586626DA482E0033E740 /* Constants */,
 				2C41662426D9626200E78AE3 /* NewGameVC */,
+				2C41663026D967BE00E78AE3 /* AddPlayerVC */,
 				2C41662326D9623800E78AE3 /* Support Files */,
 				2CCCE52626D7D98C00E3B8B7 /* Info.plist */,
 			);
@@ -176,6 +195,7 @@
 			files = (
 				2CCCE51D26D7D98900E3B8B7 /* NewGameViewController.swift in Sources */,
 				2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */,
+				2C4A586826DA48480033E740 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
