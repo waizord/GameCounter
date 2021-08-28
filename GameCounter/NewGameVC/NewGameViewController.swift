@@ -9,6 +9,7 @@ import UIKit
 
 class NewGameViewController: UIViewController {
     var dataSourse = ["Kerri", "Nine", "Glory", "Dien"]
+    var dataSoursePlayer = [Player]()
     
     let gameLabel: UILabel = {
         let label = UILabel()
@@ -34,10 +35,22 @@ class NewGameViewController: UIViewController {
         settingPlayersTableView()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        NSLayoutConstraint.deactivate(playersTable.constraints)
+        
+        NSLayoutConstraint.activate([
+            playersTable.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 25),
+            playersTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(dataSourse.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
+        ])
+    }
+    
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        playersTable.invalidateIntrinsicContentSize()
         playersTable.reloadData()
+        playersTable.invalidateIntrinsicContentSize()
     }
 }
 
@@ -98,6 +111,8 @@ extension NewGameViewController {
 //MARK: - Actions
 extension NewGameViewController {
     @objc func addPlayerButton() {
+        let addPlayerVC = AddPlayerViewController()
+        self.navigationController?.pushViewController(addPlayerVC, animated: true)
         print("tap")
     }
     
@@ -105,10 +120,9 @@ extension NewGameViewController {
         let indexPath = IndexPath(row: sender.tag, section: 0)
         print("\(indexPath.row)")
         dataSourse.remove(at: indexPath.row)
-        playersTable.beginUpdates()
         playersTable.deleteRows(at: [indexPath], with: .fade)
         playersTable.reloadData()
-        playersTable.endUpdates()
+        viewDidLayoutSubviews()
     }
 }
 
@@ -142,6 +156,7 @@ extension NewGameViewController: UITableViewDataSource {
         deleteButton.tag = indexPath.row
         deleteButton.addTarget(self, action: #selector(deletePlayerButton), for: .touchUpInside)
         cell.addSubview(deleteButton)
+        
         let accesView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
         drawHamburgerIcon(in: accesView)
         cell.accessoryView = accesView
@@ -158,11 +173,10 @@ extension NewGameViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
-            // Delete the row from the data source
             dataSourse.remove(at: indexPath.row)
-            // Then, delete the row from the table itself
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
+        viewDidLayoutSubviews()
     }
     
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
@@ -190,6 +204,7 @@ extension NewGameViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let footerView = UIView()
+        
         let button = UIButton(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: Constants.share.playerFooterHeight))
         button.addTarget(self, action: #selector(addPlayerButton), for: .touchUpInside)
         let label = UILabel(frame: CGRect(x: 56, y: 0, width: tableView.frame.width - 56, height: Constants.share.playerFooterHeight))
@@ -197,11 +212,11 @@ extension NewGameViewController: UITableViewDelegate {
         label.font = UIFont(name: "Nunito-SemiBold", size: 16)
         label.textColor = Constants.colors.customGreen
         button.addSubview(label)
+        
         let addButton = UIButton(frame: CGRect(x: 16, y: (Constants.share.playerFooterHeight / 2) - 13, width: 25, height: 25))
         addButton.layer.cornerRadius = 25 / 2
         addButton.backgroundColor = Constants.colors.customGreen
         addButton.setImage(UIImage(named: "plus"), for: .normal)
-        //addView.backgroundColor = .black
         footerView.addSubview(addButton)
         footerView.addSubview(button)
         return footerView
