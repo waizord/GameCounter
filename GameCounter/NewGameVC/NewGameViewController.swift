@@ -38,6 +38,7 @@ class NewGameViewController: UIViewController {
         button.layer.shadowColor = Constants.colors.customShadowGreen.cgColor
         button.layer.shadowOffset = CGSize(width: 0.0, height: 5.0)
         button.layer.shadowOpacity = 1.0
+        button.layer.shadowRadius = 0
         button.layer.masksToBounds = false
         return button
     }()
@@ -86,6 +87,7 @@ extension NewGameViewController {
         playersTable.register(UITableViewCell.self, forCellReuseIdentifier: "PlayerCell")
         playersTable.dataSource = self
         playersTable.delegate = self
+        playersTable.isEditing = true
         
         playersTable.layer.cornerRadius = 16
         playersTable.backgroundColor = Constants.colors.customBackgroundGray
@@ -113,30 +115,7 @@ extension NewGameViewController {
         ])
     }
 }
-//MARK: - Custom draw Icon
-extension NewGameViewController {
-    func drawHamburgerIcon(in view: UIView) {
-        drawLineFromPoint(start: CGPoint(x: 0, y: 4), toPoint: CGPoint(x: 18, y: 4), ofColor: .white, inView: view)
-        drawLineFromPoint(start: CGPoint(x: 0, y: 9), toPoint: CGPoint(x: 18, y: 9), ofColor: .white, inView: view)
-        drawLineFromPoint(start: CGPoint(x: 0, y: 14), toPoint: CGPoint(x: 18, y: 14), ofColor: .white, inView: view)
-    }
-    
-    func drawLineFromPoint(start : CGPoint, toPoint end:CGPoint, ofColor lineColor: UIColor, inView view: UIView) {
-        
-        //design the path
-        let path = UIBezierPath()
-        path.move(to: start)
-        path.addLine(to: end)
-        
-        //design path in layer
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.path = path.cgPath
-        shapeLayer.strokeColor = lineColor.cgColor
-        shapeLayer.lineWidth = 2.0
-        
-        view.layer.addSublayer(shapeLayer)
-    }
-}
+
 //MARK: - Actions
 extension NewGameViewController {
     @objc func addPlayerButton() {
@@ -154,7 +133,7 @@ extension NewGameViewController {
         viewDidLayoutSubviews()
     }
     @objc func tapStartGameButton() {
-        let gameVC = GameViewController()
+        let gameVC = GameProcessViewController()
         self.navigationController?.pushViewController(gameVC, animated: true)
         print("start")
     }
@@ -176,10 +155,10 @@ extension NewGameViewController: UITableViewDataSource {
         cell.textLabel?.textColor = .white
         cell.contentView.layoutMargins = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
         cell.textLabel?.font = UIFont(name: "Nunito-ExtraBold", size: 20)
-        cell.backgroundColor = .clear
+        cell.backgroundColor = Constants.colors.customBackgroundGray
         
         cell.selectionStyle = .none
-        let separatorLine = UIView(frame: CGRect(x: 16, y: cell.contentView.frame.height, width: cell.contentView.frame.width - 16, height: 1))
+        let separatorLine = UIView(frame: CGRect(x: 16, y: cell.frame.height, width: cell.frame.width - 16, height: 1))
         separatorLine.backgroundColor = Constants.colors.customPlayerTableSeparator
         cell.addSubview(separatorLine)
         
@@ -190,28 +169,52 @@ extension NewGameViewController: UITableViewDataSource {
         deleteButton.tag = indexPath.row
         deleteButton.addTarget(self, action: #selector(deletePlayerButton), for: .touchUpInside)
         cell.addSubview(deleteButton)
-        
-        let accesView = UIView(frame: CGRect(x: 0, y: 0, width: 18, height: 18))
-        drawHamburgerIcon(in: accesView)
-        cell.accessoryView = accesView
-        
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .none
+    }
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
 }
+
 extension NewGameViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+            cell.subviews
+                .filter { $0.isMember(of: NSClassFromString("UITableViewCellReorderControl")!) }
+                .compactMap { $0.value(forKey: "imageView") as? UIImageView }
+                //.forEach { $0.image = $0.image?.withTintColor(UIColor.red) }
+                .forEach {$0.image = $0.image?.withRenderingMode(.alwaysTemplate)
+                    $0.tintColor = .white
+                }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("row")
+        print("select row")
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            dataSourse.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-        viewDidLayoutSubviews()
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let movedObject = self.dataSourse[sourceIndexPath.row]
+        dataSourse.remove(at: sourceIndexPath.row)
+        dataSourse.insert(movedObject, at: destinationIndexPath.row)
+        tableView.reloadData()
     }
+    
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//
+//        if editingStyle == .delete {
+//            dataSourse.remove(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
+//        }
+//        viewDidLayoutSubviews()
+//    }
     
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         tableView.reloadData()
@@ -222,6 +225,7 @@ extension NewGameViewController: UITableViewDelegate {
         return Constants.share.playerCellHeight
     }
     
+    //header setting
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return Constants.share.playerHeaderHeight
     }
@@ -234,6 +238,11 @@ extension NewGameViewController: UITableViewDelegate {
         label.textColor = Constants.colors.customTextGray
         headerView.addSubview(label)
         return headerView
+    }
+    
+    //footer setting
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return Constants.share.playerFooterHeight
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -255,9 +264,11 @@ extension NewGameViewController: UITableViewDelegate {
         footerView.addSubview(button)
         return footerView
     }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return Constants.share.playerFooterHeight
+}
+///Support
+extension UIImageView {
+    func tint(color: UIColor) {
+        self.image = self.image?.withRenderingMode(.alwaysTemplate)
+        self.tintColor = color
     }
-    
 }

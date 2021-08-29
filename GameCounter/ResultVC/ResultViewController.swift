@@ -1,13 +1,13 @@
 //
-//  AddPlayerViewController.swift
+//  ResultViewController.swift
 //  GameCounter
 //
-//  Created by Ivan on 8/28/21.
+//  Created by Ivan on 8/29/21.
 //
 
 import UIKit
 
-class AddPlayerViewController: UIViewController {
+class ResultViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
