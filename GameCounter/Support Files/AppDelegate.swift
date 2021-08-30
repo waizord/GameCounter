@@ -15,7 +15,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let rootVC = NewGameViewController()
+        
         let navVC = UINavigationController(rootViewController: rootVC)
+        navVC.navigationBar.barTintColor = Constants.colors.appBackgroundBlack
+        navVC.navigationBar.isTranslucent = false
+        navVC.navigationBar.setValue(true, forKey: "hidesShadow")
+        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: "Nunito-ExtraBold", size: 17)!], for: .normal)
+        UIBarButtonItem.appearance().tintColor = Constants.colors.customGreen
+        
         self.window?.rootViewController = navVC
         self.window?.makeKeyAndVisible()
         // Override point for customization after application launch.

@@ -48,6 +48,7 @@ class NewGameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = Constants.colors.appBackgroundBlack
+        settingNavBar()
         settingGameLabel()
         settingPlayersTableView()
         settingStartGameButton()
@@ -72,6 +73,23 @@ class NewGameViewController: UIViewController {
     }
 }
 
+//MARK: - Actions
+extension NewGameViewController {
+    @objc func tapCancel() {
+        print("tap on Cancel")
+    }
+}
+
+//MARK: - Setting NavBar
+extension NewGameViewController {
+    func settingNavBar() {
+        let backButton = UIBarButtonItem()
+        backButton.title = "Cancel"
+        backButton.target = self
+        backButton.action = #selector(tapCancel)
+        self.navigationItem.leftBarButtonItem = backButton
+    }
+}
 //MARK: - Setting views
 extension NewGameViewController {
     func settingGameLabel() {
