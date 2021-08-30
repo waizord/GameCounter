@@ -9,7 +9,7 @@ import UIKit
 
 class NewGameViewController: UIViewController {
     var dataSourse = ["Kerri", "Nine", "Glory", "Dien"]
-    var dataSoursePlayer = [Player]()
+    var dataSoursePlayers = [Player]()
     
     let gameLabel: UILabel = {
         let label = UILabel()
@@ -65,12 +65,12 @@ class NewGameViewController: UIViewController {
             playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(dataSourse.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
         ])
     }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        playersTable.reloadData()
-        playersTable.invalidateIntrinsicContentSize()
-    }
+//    
+//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        super.willTransition(to: newCollection, with: coordinator)
+//        playersTable.reloadData()
+//        playersTable.invalidateIntrinsicContentSize()
+//    }
 }
 
 //MARK: - Actions

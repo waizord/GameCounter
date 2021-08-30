@@ -23,5 +23,7 @@ class Constants {
         let customShadowGreen = UIColor(red: 84.0/255.0, green: 120.0/255.0, blue: 111.0/255.0, alpha: 1)
         let customRed = UIColor(red: 0.925, green: 0.369, blue: 0.376, alpha: 1)
         let customPlayerTableSeparator = UIColor(red: 0.333, green: 0.333, blue: 0.333, alpha: 1)
+        let customPlaseHolder = UIColor(red: 155.0/255.0, green: 155.0/255.0, blue: 161.0/255.0, alpha: 1)
+        
     }
 }
