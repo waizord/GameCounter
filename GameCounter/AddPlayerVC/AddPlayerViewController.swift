@@ -32,8 +32,8 @@ class AddPlayerViewController: UIViewController {
         field.translatesAutoresizingMaskIntoConstraints = false
         field.backgroundColor = Constants.colors.customBackgroundGray
         field.font = UIFont(name: "Nunito-ExtraBold", size: 20)
-        field.textColor = Constants.colors.customPlaseHolder
-        field.attributedPlaceholder = NSAttributedString(string: "Player Name", attributes: [NSAttributedString.Key.foregroundColor : Constants.colors.customPlaseHolder])
+        field.textColor = Constants.colors.customPlaceHolder
+        field.attributedPlaceholder = NSAttributedString(string: "Player Name", attributes: [NSAttributedString.Key.foregroundColor : Constants.colors.customPlaceHolder])
         field.becomeFirstResponder()
         return field
     }()
@@ -78,6 +78,7 @@ extension AddPlayerViewController {
         addButton.target = self
         addButton.action = #selector(tapAddButton)
         self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
     }
 }
 
@@ -120,7 +121,10 @@ extension AddPlayerViewController: UITextFieldDelegate {
         if let text = textField.text {
             if !text.isReallyEmpty {
                 sendName = text.trimmingCharacters(in: .whitespacesAndNewlines)
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
                 print(sendName!)
+            }else {
+                self.navigationItem.rightBarButtonItem?.isEnabled = false
             }
         }
     }
