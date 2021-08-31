@@ -10,6 +10,7 @@ import UIKit
 class AddPlayerViewController: UIViewController {
     
     var sendName: String?
+    var delegate: AddPlayerProtocolDelegate!
     
     let addPlayerLabel: UILabel = {
         let label = UILabel()
@@ -57,10 +58,12 @@ extension AddPlayerViewController {
     }
     
     @objc func tapAddButton() {
-        if let name = sendName {
-            print("tap on Add name: \(name)")
+        if let nameToBeSent = sendName {
+            if self.delegate != nil {
+                self.delegate?.addPlayerName(nameToBeSent)
+                self.navigationController?.popViewController(animated: true)
+            }
         }
-        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -122,7 +125,7 @@ extension AddPlayerViewController: UITextFieldDelegate {
             if !text.isReallyEmpty {
                 sendName = text.trimmingCharacters(in: .whitespacesAndNewlines)
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
-                print(sendName!)
+//                print(sendName!)
             }else {
                 self.navigationItem.rightBarButtonItem?.isEnabled = false
             }
@@ -139,12 +142,5 @@ extension AddPlayerViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
-    }
-}
-
-///Support
-extension String {
-    var isReallyEmpty: Bool {
-        return self.trimmingCharacters(in: .whitespaces).isEmpty
     }
 }

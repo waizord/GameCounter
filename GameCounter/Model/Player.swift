@@ -6,19 +6,20 @@
 //
 
 import Foundation
-class Player: NSObject {
-    let name: String = ""
+class Player {
+    var name: String = ""
     let result: Int? = nil
     let lastResult: Int? = nil
     var firstSimbol: String = ""
     
-    func firstSimbolName() {
+    init(name: String) {
+        self.name = name
+        self.firstSimbolName()
+    }
+    
+    private func firstSimbolName() {
         if let char = name.first {
             self.firstSimbol = String(char)
         }
-    }
-    override init() {
-        super.init()
-        firstSimbolName()
     }
 }

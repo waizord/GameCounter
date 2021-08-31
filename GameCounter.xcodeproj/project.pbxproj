@@ -16,6 +16,9 @@
 		2C4A587026DAB5810033E740 /* AddPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A586F26DAB5810033E740 /* AddPlayerViewController.swift */; };
 		2C4A587426DACFD70033E740 /* GameProcessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A587326DACFD70033E740 /* GameProcessViewController.swift */; };
 		2C4A587826DB11730033E740 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C4A587726DB11730033E740 /* ResultViewController.swift */; };
+		2CC6412D26DE227100703831 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6412C26DE227100703831 /* UIImageView.swift */; };
+		2CC6413326DE230000703831 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6413226DE230000703831 /* String.swift */; };
+		2CC6413726DE247500703831 /* AddPlayerProtocolDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CC6413626DE247500703831 /* AddPlayerProtocolDelegate.swift */; };
 		2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */; };
 		2CCCE51D26D7D98900E3B8B7 /* NewGameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */; };
 		2CCCE52026D7D98900E3B8B7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2CCCE51E26D7D98900E3B8B7 /* Main.storyboard */; };
@@ -33,6 +36,9 @@
 		2C4A586F26DAB5810033E740 /* AddPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerViewController.swift; sourceTree = "<group>"; };
 		2C4A587326DACFD70033E740 /* GameProcessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameProcessViewController.swift; sourceTree = "<group>"; };
 		2C4A587726DB11730033E740 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
+		2CC6412C26DE227100703831 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
+		2CC6413226DE230000703831 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		2CC6413626DE247500703831 /* AddPlayerProtocolDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlayerProtocolDelegate.swift; sourceTree = "<group>"; };
 		2CCCE51526D7D98900E3B8B7 /* GameCounter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GameCounter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2CCCE51826D7D98900E3B8B7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2CCCE51C26D7D98900E3B8B7 /* NewGameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameViewController.swift; sourceTree = "<group>"; };
@@ -124,6 +130,23 @@
 			path = ResultVC;
 			sourceTree = "<group>";
 		};
+		2CC6412F26DE228900703831 /* Custom Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2CC6412C26DE227100703831 /* UIImageView.swift */,
+				2CC6413226DE230000703831 /* String.swift */,
+			);
+			path = "Custom Extensions";
+			sourceTree = "<group>";
+		};
+		2CC6413526DE244900703831 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				2CC6413626DE247500703831 /* AddPlayerProtocolDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		2CCCE50C26D7D98900E3B8B7 = {
 			isa = PBXGroup;
 			children = (
@@ -143,12 +166,14 @@
 		2CCCE51726D7D98900E3B8B7 /* GameCounter */ = {
 			isa = PBXGroup;
 			children = (
+				2CC6413526DE244900703831 /* Protocols */,
 				2C4A586B26DAB0F60033E740 /* Model */,
-				2C4A586626DA482E0033E740 /* Constants */,
 				2C41662426D9626200E78AE3 /* NewGameVC */,
 				2C41663026D967BE00E78AE3 /* AddPlayerVC */,
 				2C4A587626DB11390033E740 /* ResultVC */,
 				2C4A587226DACFA90033E740 /* GameVC */,
+				2C4A586626DA482E0033E740 /* Constants */,
+				2CC6412F26DE228900703831 /* Custom Extensions */,
 				2C41662326D9623800E78AE3 /* Support Files */,
 				2CCCE52626D7D98C00E3B8B7 /* Info.plist */,
 			);
@@ -232,8 +257,11 @@
 				2C4A586D26DAB1130033E740 /* Player.swift in Sources */,
 				2C4A587026DAB5810033E740 /* AddPlayerViewController.swift in Sources */,
 				2C4A587826DB11730033E740 /* ResultViewController.swift in Sources */,
+				2CC6413326DE230000703831 /* String.swift in Sources */,
 				2CCCE51D26D7D98900E3B8B7 /* NewGameViewController.swift in Sources */,
 				2CCCE51926D7D98900E3B8B7 /* AppDelegate.swift in Sources */,
+				2CC6412D26DE227100703831 /* UIImageView.swift in Sources */,
+				2CC6413726DE247500703831 /* AddPlayerProtocolDelegate.swift in Sources */,
 				2C4A587426DACFD70033E740 /* GameProcessViewController.swift in Sources */,
 				2C4A586826DA48480033E740 /* Constants.swift in Sources */,
 			);

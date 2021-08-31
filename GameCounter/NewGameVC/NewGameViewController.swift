@@ -8,8 +8,7 @@
 import UIKit
 
 class NewGameViewController: UIViewController {
-    var dataSourse = ["Kerri", "Nine", "Glory", "Dien"]
-    var dataSoursePlayers = [Player]()
+    var players = [Player]()
     
     let gameLabel: UILabel = {
         let label = UILabel()
@@ -44,6 +43,12 @@ class NewGameViewController: UIViewController {
     }()
     
     let heightConstraint = NSLayoutConstraint()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        playersTable.reloadData()
+        viewDidLayoutSubviews()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,26 +62,34 @@ class NewGameViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         NSLayoutConstraint.deactivate(playersTable.constraints)
-        
-        NSLayoutConstraint.activate([
-            playersTable.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 25),
-            playersTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(dataSourse.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
-        ])
+        settingPlayersTableViewConstraints()
     }
-//    
-//    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-//        super.willTransition(to: newCollection, with: coordinator)
-//        playersTable.reloadData()
-//        playersTable.invalidateIntrinsicContentSize()
-//    }
 }
 
 //MARK: - Actions
 extension NewGameViewController {
     @objc func tapCancel() {
         print("tap on Cancel")
+    }
+    
+    @objc func addPlayerButton() {
+        let addPlayerVC = AddPlayerViewController()
+        addPlayerVC.delegate = self
+        self.navigationController?.pushViewController(addPlayerVC, animated: true)
+    }
+    
+    @objc func deletePlayerButton(_ sender: UIButton) {
+        let indexPath = IndexPath(row: sender.tag, section: 0)
+        print("Delete row: \(indexPath.row)")
+        players.remove(at: indexPath.row)
+        playersTable.deleteRows(at: [indexPath], with: .fade)
+        playersTable.reloadData()
+        viewDidLayoutSubviews()
+    }
+    @objc func tapStartGameButton() {
+        let gameVC = GameProcessViewController()
+        self.navigationController?.pushViewController(gameVC, animated: true)
+        print("start")
     }
 }
 
@@ -94,11 +107,7 @@ extension NewGameViewController {
 extension NewGameViewController {
     func settingGameLabel() {
         view.addSubview(gameLabel)
-        
-        NSLayoutConstraint.activate([
-            gameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
-            gameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
-        ])
+        settingGameLabelConstraints()
     }
     
     func settingPlayersTableView() {
@@ -111,20 +120,24 @@ extension NewGameViewController {
         playersTable.backgroundColor = Constants.colors.customBackgroundGray
         
         view.addSubview(playersTable)
-        
-        heightConstraint.constant = Constants.share.playerCellHeight * CGFloat(dataSourse.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight
-        
-        NSLayoutConstraint.activate([
-            playersTable.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 25),
-            playersTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(dataSourse.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
-        ])
+        settingPlayersTableViewConstraints()
     }
     
     func settingStartGameButton() {
         view.addSubview(startButton)
-        
+        settingStartGameButtonConstraints()
+    }
+}
+
+//MARK: - Constraints
+extension NewGameViewController {
+    func settingGameLabelConstraints() {
+        NSLayoutConstraint.activate([
+            gameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 12),
+            gameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20)
+        ])
+    }
+    func settingStartGameButtonConstraints() {
         NSLayoutConstraint.activate([
             startButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -70),
             startButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
@@ -132,36 +145,33 @@ extension NewGameViewController {
             startButton.heightAnchor.constraint(equalToConstant: Constants.share.startButtonHeight)
         ])
     }
+    
+    func settingPlayersTableViewConstraints() {
+        heightConstraint.constant = Constants.share.playerCellHeight * CGFloat(players.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight
+        
+        NSLayoutConstraint.activate([
+            playersTable.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 25),
+            playersTable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(players.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
+        ])
+    }
 }
 
-//MARK: - Actions
-extension NewGameViewController {
-    @objc func addPlayerButton() {
-        let addPlayerVC = AddPlayerViewController()
-        self.navigationController?.pushViewController(addPlayerVC, animated: true)
-        print("tap")
-    }
-    
-    @objc func deletePlayerButton(_ sender: UIButton) {
-        let indexPath = IndexPath(row: sender.tag, section: 0)
-        print("\(indexPath.row)")
-        dataSourse.remove(at: indexPath.row)
-        playersTable.deleteRows(at: [indexPath], with: .fade)
-        playersTable.reloadData()
-        viewDidLayoutSubviews()
-    }
-    @objc func tapStartGameButton() {
-        let gameVC = GameProcessViewController()
-        self.navigationController?.pushViewController(gameVC, animated: true)
-        print("start")
+//MARK: - Custom Delegate
+extension NewGameViewController: AddPlayerProtocolDelegate {
+    func addPlayerName(_ name: String) {
+        let player = Player(name: name)
+        players.append(player)
     }
 }
 
 //MARK: - DataSource and Delegate
 extension NewGameViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSourse.count
+        return players.count
     }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -169,7 +179,7 @@ extension NewGameViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "PlayerCell", for: indexPath)
         
-        cell.textLabel?.text = dataSourse[indexPath.row]
+        cell.textLabel?.text = players[indexPath.row].name
         cell.textLabel?.textColor = .white
         cell.contentView.layoutMargins = UIEdgeInsets(top: 0, left: 56, bottom: 0, right: 0)
         cell.textLabel?.font = UIFont(name: "Nunito-ExtraBold", size: 20)
@@ -208,31 +218,17 @@ extension NewGameViewController: UITableViewDelegate {
             cell.subviews
                 .filter { $0.isMember(of: NSClassFromString("UITableViewCellReorderControl")!) }
                 .compactMap { $0.value(forKey: "imageView") as? UIImageView }
-                //.forEach { $0.image = $0.image?.withTintColor(UIColor.red) }
                 .forEach {$0.image = $0.image?.withRenderingMode(.alwaysTemplate)
                     $0.tintColor = .white
                 }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("select row")
-    }
-    
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let movedObject = self.dataSourse[sourceIndexPath.row]
-        dataSourse.remove(at: sourceIndexPath.row)
-        dataSourse.insert(movedObject, at: destinationIndexPath.row)
+        let movedObject = self.players[sourceIndexPath.row]
+        players.remove(at: sourceIndexPath.row)
+        players.insert(movedObject, at: destinationIndexPath.row)
         tableView.reloadData()
     }
-    
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//
-//        if editingStyle == .delete {
-//            dataSourse.remove(at: indexPath.row)
-//            tableView.deleteRows(at: [indexPath], with: .fade)
-//        }
-//        viewDidLayoutSubviews()
-//    }
     
     func tableView(_ tableView: UITableView, didEndEditingRowAt indexPath: IndexPath?) {
         tableView.reloadData()
@@ -281,12 +277,5 @@ extension NewGameViewController: UITableViewDelegate {
         footerView.addSubview(addButton)
         footerView.addSubview(button)
         return footerView
-    }
-}
-///Support
-extension UIImageView {
-    func tint(color: UIColor) {
-        self.image = self.image?.withRenderingMode(.alwaysTemplate)
-        self.tintColor = color
     }
 }
