@@ -42,8 +42,6 @@ class NewGameViewController: UIViewController {
         return button
     }()
     
-    let heightConstraint = NSLayoutConstraint()
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         playersTable.reloadData()
@@ -62,6 +60,8 @@ class NewGameViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         NSLayoutConstraint.deactivate(playersTable.constraints)
+        //settingGameLabelConstraints()
+        //settingStartGameButtonConstraints()
         settingPlayersTableViewConstraints()
     }
 }
@@ -69,6 +69,7 @@ class NewGameViewController: UIViewController {
 //MARK: - Actions
 extension NewGameViewController {
     @objc func tapCancel() {
+        self.navigationController?.popViewController(animated: true)
         print("tap on Cancel")
     }
     
@@ -147,7 +148,11 @@ extension NewGameViewController {
     }
     
     func settingPlayersTableViewConstraints() {
-        heightConstraint.constant = Constants.share.playerCellHeight * CGFloat(players.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight
+        
+        let heightTableSizeConstraint = Constants.share.playerCellHeight * CGFloat(players.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight
+        
+        let heightSearchLine = view.safeAreaLayoutGuide.layoutFrame.height - gameLabel.frame.height - startButton.frame.height - CGFloat(12 + 25 + 70)
+        print(heightSearchLine, heightTableSizeConstraint)
         
         NSLayoutConstraint.activate([
             playersTable.topAnchor.constraint(equalTo: gameLabel.bottomAnchor, constant: 25),
@@ -155,6 +160,12 @@ extension NewGameViewController {
             playersTable.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             playersTable.heightAnchor.constraint(equalToConstant: Constants.share.playerCellHeight * CGFloat(players.count) + Constants.share.playerHeaderHeight + Constants.share.playerFooterHeight)
         ])
+        
+//        if heightTableSizeConstraint <= heightSearchLine {
+//            playersTable.heightAnchor.constraint(equalToConstant: heightTableSizeConstraint).isActive = true
+//        }else {
+//            playersTable.bottomAnchor.constraint(equalTo: startButton.topAnchor, constant: -20).isActive = true
+//        }
     }
 }
 

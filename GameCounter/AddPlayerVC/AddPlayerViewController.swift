@@ -125,7 +125,6 @@ extension AddPlayerViewController: UITextFieldDelegate {
             if !text.isReallyEmpty {
                 sendName = text.trimmingCharacters(in: .whitespacesAndNewlines)
                 self.navigationItem.rightBarButtonItem?.isEnabled = true
-//                print(sendName!)
             }else {
                 self.navigationItem.rightBarButtonItem?.isEnabled = false
             }
